@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carvex - Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30 5L50 15V35L30 45L10 35V15L30 5Z" stroke="white" stroke-width="2" fill="none"/>
+                    <circle cx="30" cy="25" r="8" fill="white"/>
+                </svg>
+                <span>Carvex</span>
+            </div>
+            <div class="nav-user">
+                <span id="userGreeting">Bienvenido</span>
+                <button class="logout-btn" id="logoutBtn">Cerrar Sesión</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <svg width="30" height="30" fill="white" viewBox="0 0 24 24">
+                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <h3 id="totalVehicles">0</h3>
+                    <p>Vehículos Totales</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <svg width="30" height="30" fill="white" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <h3 id="activeVehicles">0</h3>
+                    <p>ITV al Día</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);">
+                    <svg width="30" height="30" fill="white" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <h3 id="pendingITV">0</h3>
+                    <p>ITV Pendientes</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Section -->
+        <div class="action-section">
+            <h2>Mis Vehículos</h2>
+            <button class="add-btn" id="addVehicleBtn">
+                <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                </svg>
+                Añadir Vehículo
+            </button>
+        </div>
+
+        <!-- Vehicles Grid -->
+        <div class="vehicles-grid" id="vehiclesGrid">
+            <!-- Los vehículos se cargarán dinámicamente aquí -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState">
+            <svg width="120" height="120" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+            </svg>
+            <h3>No tienes vehículos registrados</h3>
+            <p>Comienza añadiendo tu primer vehículo</p>
+        </div>
+    </div>
+
+    <!-- Modal para añadir/editar vehículo -->
+    <div class="modal" id="vehicleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Añadir Vehículo</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="vehicleForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="brand">Marca</label>
+                        <input type="text" id="brand" required placeholder="Ej: Toyota">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="model">Modelo</label>
+                        <input type="text" id="model" required placeholder="Ej: Corolla">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="year">Año</label>
+                        <input type="number" id="year" required placeholder="Ej: 2020" min="1900" max="2099">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="plate">Matrícula</label>
+                        <input type="text" id="plate" required placeholder="Ej: 1234ABC">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="color">Color</label>
+                        <input type="text" id="color" placeholder="Ej: Rojo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="km">Kilometraje</label>
+                        <input type="number" id="km" placeholder="Ej: 50000" min="0">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="lastITV">Última ITV</label>
+                        <input type="date" id="lastITV">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="nextITV">Próxima ITV</label>
+                        <input type="date" id="nextITV" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="notes">Notas</label>
+                        <textarea id="notes" rows="3" placeholder="Añade notas adicionales sobre el vehículo..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="submit-btn">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
