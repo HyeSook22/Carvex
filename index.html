@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carvex - Inicio de Sesión</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <div class="login-card">
+            <div class="logo">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30 5L50 15V35L30 45L10 35V15L30 5Z" stroke="url(#gradient)" stroke-width="2" fill="none"/>
+                    <circle cx="30" cy="25" r="8" fill="url(#gradient)"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#a8c0ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#3f2b96;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <h1>Bienvenido a Carvex</h1>
+            <p class="subtitle">Gestiona tus vehículos de forma inteligente</p>
+
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" name="username" required placeholder="Introduce tu usuario">
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required placeholder="Introduce tu contraseña">
+                </div>
+
+                <div class="remember-forgot">
+                    <label class="remember">
+                        <input type="checkbox" id="remember">
+                        <span>Recordarme</span>
+                    </label>
+                    <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <button type="submit" class="login-btn">Iniciar Sesión</button>
+
+                <div class="divider">
+                    <span>o</span>
+                </div>
+
+                <button type="button" class="register-btn" id="registerBtn">Crear nueva cuenta</button>
+            </form>
+
+            <div class="footer-text">
+                <p>Al continuar, aceptas nuestros <a href="#">Términos de Servicio</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>
